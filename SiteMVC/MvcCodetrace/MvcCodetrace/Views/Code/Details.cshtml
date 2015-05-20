@@ -1,0 +1,22 @@
+﻿@model MvcCodetrace.Models.Code
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Code</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodeTrace)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodeTrace)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,53 @@
+﻿@model MvcCodetrace.Models.Bouteille
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Bouteille</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeVin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeVin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Region)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Region)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Producteur)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Producteur)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Rengement.Emplacement)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rengement.Emplacement)
+    </div>
+    <div>
+        @Html.Action("getQrCode", "Bouteille", new { id = Model.Id })
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

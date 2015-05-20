@@ -1,0 +1,33 @@
+﻿@model MvcCodetrace.Models.Agregation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Agregation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodeContenu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodeContenu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Code.CodeTrace)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Code.CodeTrace)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

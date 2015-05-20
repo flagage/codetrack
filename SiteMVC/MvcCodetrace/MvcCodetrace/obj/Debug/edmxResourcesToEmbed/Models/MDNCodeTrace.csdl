@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="codetrackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="codetrackEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CodeSet" EntityType="codetrackModel.Code" />
+    <EntitySet Name="AgergationSet" EntityType="codetrackModel.Agergation" />
+    <AssociationSet Name="CodeAgergation" Association="codetrackModel.CodeAgergation">
+      <End Role="Code" EntitySet="CodeSet" />
+      <End Role="Agergation" EntitySet="AgergationSet" />
+    </AssociationSet>
+    <AssociationSet Name="RengementBouteille" Association="codetrackModel.RengementBouteille">
+      <End Role="Rengement" EntitySet="CodeSet" />
+      <End Role="Bouteille" EntitySet="CodeSet" />
+    </AssociationSet>
+    <AssociationSet Name="CaveRengement" Association="codetrackModel.CaveRengement">
+      <End Role="Cave" EntitySet="CodeSet" />
+      <End Role="Rengement" EntitySet="CodeSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Code">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodeTrack" Type="String" Nullable="false" />
+    <NavigationProperty Name="Agergation" Relationship="codetrackModel.CodeAgergation" FromRole="Code" ToRole="Agergation" />
+  </EntityType>
+  <EntityType Name="Agergation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodeContenu" Type="String" Nullable="false" />
+    <NavigationProperty Name="Code" Relationship="codetrackModel.CodeAgergation" FromRole="Agergation" ToRole="Code" />
+    <Property Name="CodeId" Type="Int32" Nullable="true" />
+  </EntityType>
+  <Association Name="CodeAgergation">
+    <End Type="codetrackModel.Code" Role="Code" Multiplicity="0..1" />
+    <End Type="codetrackModel.Agergation" Role="Agergation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agergation">
+        <PropertyRef Name="CodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Bouteille" BaseType="codetrackModel.Code">
+    <Property Name="TypeVin" Type="String" Nullable="false" />
+    <Property Name="Producteur" Type="String" Nullable="false" />
+    <Property Name="Annee" Type="String" Nullable="false" />
+    <Property Name="Region" Type="String" Nullable="false" />
+    <NavigationProperty Name="Rengement" Relationship="codetrackModel.RengementBouteille" FromRole="Bouteille" ToRole="Rengement" />
+    <Property Name="RengementId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rengement" BaseType="codetrackModel.Code">
+    <Property Name="QuantiteMax" Type="String" Nullable="false" />
+    <Property Name="Quantite" Type="String" Nullable="false" />
+    <NavigationProperty Name="Bouteille" Relationship="codetrackModel.RengementBouteille" FromRole="Rengement" ToRole="Bouteille" />
+    <NavigationProperty Name="Cave" Relationship="codetrackModel.CaveRengement" FromRole="Rengement" ToRole="Cave" />
+    <Property Name="CaveId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cave" BaseType="codetrackModel.Code">
+    <Property Name="Proprietaire" Type="String" Nullable="false" />
+    <NavigationProperty Name="Rengement" Relationship="codetrackModel.CaveRengement" FromRole="Cave" ToRole="Rengement" />
+  </EntityType>
+  <Association Name="RengementBouteille">
+    <End Type="codetrackModel.Rengement" Role="Rengement" Multiplicity="1" />
+    <End Type="codetrackModel.Bouteille" Role="Bouteille" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rengement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bouteille">
+        <PropertyRef Name="RengementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CaveRengement">
+    <End Type="codetrackModel.Cave" Role="Cave" Multiplicity="1" />
+    <End Type="codetrackModel.Rengement" Role="Rengement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cave">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rengement">
+        <PropertyRef Name="CaveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
