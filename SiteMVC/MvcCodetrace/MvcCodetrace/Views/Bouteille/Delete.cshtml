@@ -1,0 +1,54 @@
+﻿@model MvcCodetrace.Models.Bouteille
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Bouteille</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeVin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeVin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Region)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Region)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Producteur)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Producteur)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Rengement.QuantiteMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rengement.QuantiteMax)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

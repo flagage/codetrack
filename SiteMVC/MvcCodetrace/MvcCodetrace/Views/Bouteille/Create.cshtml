@@ -1,0 +1,68 @@
+﻿@model MvcCodetrace.Models.Bouteille
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Bouteille</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TypeVin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TypeVin)
+            @Html.ValidationMessageFor(model => model.TypeVin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Region)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Region)
+            @Html.ValidationMessageFor(model => model.Region)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Producteur)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Producteur)
+            @Html.ValidationMessageFor(model => model.Producteur)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RengementId, "Rengement")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RengementId", String.Empty)
+            @Html.ValidationMessageFor(model => model.RengementId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

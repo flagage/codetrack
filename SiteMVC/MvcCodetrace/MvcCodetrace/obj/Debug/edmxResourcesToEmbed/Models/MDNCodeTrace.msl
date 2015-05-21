@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="codetrackModelStoreContainer" CdmEntityContainer="codetrackEntities">
+    <EntitySetMapping Name="CodeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(codetrackModel.Code)">
+        <MappingFragment StoreEntitySet="CodeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodeTrack" ColumnName="CodeTrack" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(codetrackModel.Rengement)">
+        <MappingFragment StoreEntitySet="CodeSet_Rengement">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuantiteMax" ColumnName="QuantiteMax" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="CaveId" ColumnName="CaveId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(codetrackModel.Bouteille)">
+        <MappingFragment StoreEntitySet="CodeSet_Bouteille">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeVin" ColumnName="TypeVin" />
+          <ScalarProperty Name="Producteur" ColumnName="Producteur" />
+          <ScalarProperty Name="Annee" ColumnName="Annee" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="RengementId" ColumnName="RengementId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(codetrackModel.Cave)">
+        <MappingFragment StoreEntitySet="CodeSet_Cave">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Proprietaire" ColumnName="Proprietaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgergationSet">
+      <EntityTypeMapping TypeName="IsTypeOf(codetrackModel.Agergation)">
+        <MappingFragment StoreEntitySet="AgergationSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodeContenu" ColumnName="CodeContenu" />
+          <ScalarProperty Name="CodeId" ColumnName="CodeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

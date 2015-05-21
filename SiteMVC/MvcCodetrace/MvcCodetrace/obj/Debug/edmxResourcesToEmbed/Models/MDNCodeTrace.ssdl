@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="codetrackModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="codetrackModelStoreContainer">
+    <EntitySet Name="CodeSet" EntityType="codetrackModel.Store.CodeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AgergationSet" EntityType="codetrackModel.Store.AgergationSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeSet_Rengement" EntityType="codetrackModel.Store.CodeSet_Rengement" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeSet_Bouteille" EntityType="codetrackModel.Store.CodeSet_Bouteille" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CodeSet_Cave" EntityType="codetrackModel.Store.CodeSet_Cave" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CodeAgergation" Association="codetrackModel.Store.CodeAgergation">
+      <End Role="Code" EntitySet="CodeSet" />
+      <End Role="Agergation" EntitySet="AgergationSet" />
+    </AssociationSet>
+    <AssociationSet Name="RengementBouteille" Association="codetrackModel.Store.RengementBouteille">
+      <End Role="Rengement" EntitySet="CodeSet_Rengement" />
+      <End Role="Bouteille" EntitySet="CodeSet_Bouteille" />
+    </AssociationSet>
+    <AssociationSet Name="CaveRengement" Association="codetrackModel.Store.CaveRengement">
+      <End Role="Cave" EntitySet="CodeSet_Cave" />
+      <End Role="Rengement" EntitySet="CodeSet_Rengement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rengement_inherits_Code" Association="codetrackModel.Store.FK_Rengement_inherits_Code">
+      <End Role="Code" EntitySet="CodeSet" />
+      <End Role="Rengement" EntitySet="CodeSet_Rengement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bouteille_inherits_Code" Association="codetrackModel.Store.FK_Bouteille_inherits_Code">
+      <End Role="Code" EntitySet="CodeSet" />
+      <End Role="Bouteille" EntitySet="CodeSet_Bouteille" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cave_inherits_Code" Association="codetrackModel.Store.FK_Cave_inherits_Code">
+      <End Role="Code" EntitySet="CodeSet" />
+      <End Role="Cave" EntitySet="CodeSet_Cave" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CodeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeTrack" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AgergationSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeContenu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CodeId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CodeSet_Rengement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="QuantiteMax" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Quantite" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CaveId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CodeSet_Bouteille">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="TypeVin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Producteur" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Annee" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Region" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RengementId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CodeSet_Cave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Proprietaire" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CodeAgergation">
+    <End Role="Code" Type="codetrackModel.Store.CodeSet" Multiplicity="0..1" />
+    <End Role="Agergation" Type="codetrackModel.Store.AgergationSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agergation">
+        <PropertyRef Name="CodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RengementBouteille">
+    <End Role="Rengement" Type="codetrackModel.Store.CodeSet_Rengement" Multiplicity="1" />
+    <End Role="Bouteille" Type="codetrackModel.Store.CodeSet_Bouteille" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rengement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bouteille">
+        <PropertyRef Name="RengementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CaveRengement">
+    <End Role="Cave" Type="codetrackModel.Store.CodeSet_Cave" Multiplicity="1" />
+    <End Role="Rengement" Type="codetrackModel.Store.CodeSet_Rengement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cave">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rengement">
+        <PropertyRef Name="CaveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rengement_inherits_Code">
+    <End Role="Code" Type="codetrackModel.Store.CodeSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rengement" Type="codetrackModel.Store.CodeSet_Rengement" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rengement">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bouteille_inherits_Code">
+    <End Role="Code" Type="codetrackModel.Store.CodeSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bouteille" Type="codetrackModel.Store.CodeSet_Bouteille" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bouteille">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cave_inherits_Code">
+    <End Role="Code" Type="codetrackModel.Store.CodeSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cave" Type="codetrackModel.Store.CodeSet_Cave" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cave">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

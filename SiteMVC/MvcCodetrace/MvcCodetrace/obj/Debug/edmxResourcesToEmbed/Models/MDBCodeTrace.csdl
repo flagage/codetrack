@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CodeTraceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agregation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodeContenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodeId" Type="Int32" />
+    <NavigationProperty Name="Code" Relationship="Self.FK_CodeAgregation" FromRole="Agregation" ToRole="Code" />
+  </EntityType>
+  <EntityType Name="Bouteille">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="TypeVin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Region" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Producteur" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RengementId" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Code" Relationship="Self.FK_Bouteille_inherits_Code" FromRole="Bouteille" ToRole="Code" />
+    <NavigationProperty Name="Rengement" Relationship="Self.FK_RengementBouteille" FromRole="Bouteille" ToRole="Rengement" />
+  </EntityType>
+  <EntityType Name="Cave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Proprietaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Code" Relationship="Self.FK_Cave_inherits_Code" FromRole="Cave" ToRole="Code" />
+    <NavigationProperty Name="Rengements" Relationship="Self.FK_CaveRengement" FromRole="Cave" ToRole="Rengement" />
+  </EntityType>
+  <EntityType Name="Code">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Agregations" Relationship="Self.FK_CodeAgregation" FromRole="Code" ToRole="Agregation" />
+    <NavigationProperty Name="Bouteille" Relationship="Self.FK_Bouteille_inherits_Code" FromRole="Code" ToRole="Bouteille" />
+    <NavigationProperty Name="Cave" Relationship="Self.FK_Cave_inherits_Code" FromRole="Code" ToRole="Cave" />
+    <NavigationProperty Name="Rengement" Relationship="Self.FK_Rengement_inherits_Code" FromRole="Code" ToRole="Rengement" />
+    <Property Name="CodeTrace" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+  </EntityType>
+  <EntityType Name="Rengement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Emplacement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="QuantiteMax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CaveId" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bouteilles" Relationship="Self.FK_RengementBouteille" FromRole="Rengement" ToRole="Bouteille" />
+    <NavigationProperty Name="Cave" Relationship="Self.FK_CaveRengement" FromRole="Rengement" ToRole="Cave" />
+    <NavigationProperty Name="Code" Relationship="Self.FK_Rengement_inherits_Code" FromRole="Rengement" ToRole="Code" />
+  </EntityType>
+  <Association Name="FK_CodeAgregation">
+    <End Role="Code" Type="Self.Code" Multiplicity="0..1" />
+    <End Role="Agregation" Type="Self.Agregation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agregation">
+        <PropertyRef Name="CodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bouteille_inherits_Code">
+    <End Role="Code" Type="Self.Code" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bouteille" Type="Self.Bouteille" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bouteille">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RengementBouteille">
+    <End Role="Rengement" Type="Self.Rengement" Multiplicity="0..1" />
+    <End Role="Bouteille" Type="Self.Bouteille" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rengement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bouteille">
+        <PropertyRef Name="RengementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cave_inherits_Code">
+    <End Role="Code" Type="Self.Code" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cave" Type="Self.Cave" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cave">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CaveRengement">
+    <End Role="Cave" Type="Self.Cave" Multiplicity="0..1" />
+    <End Role="Rengement" Type="Self.Rengement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cave">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rengement">
+        <PropertyRef Name="CaveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rengement_inherits_Code">
+    <End Role="Code" Type="Self.Code" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rengement" Type="Self.Rengement" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Code">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rengement">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CodeTraceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agregations" EntityType="Self.Agregation" />
+    <EntitySet Name="Bouteilles" EntityType="Self.Bouteille" />
+    <EntitySet Name="Caves" EntityType="Self.Cave" />
+    <EntitySet Name="Codes" EntityType="Self.Code" />
+    <EntitySet Name="Rengements" EntityType="Self.Rengement" />
+    <AssociationSet Name="FK_CodeAgregation" Association="Self.FK_CodeAgregation">
+      <End Role="Code" EntitySet="Codes" />
+      <End Role="Agregation" EntitySet="Agregations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bouteille_inherits_Code" Association="Self.FK_Bouteille_inherits_Code">
+      <End Role="Code" EntitySet="Codes" />
+      <End Role="Bouteille" EntitySet="Bouteilles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RengementBouteille" Association="Self.FK_RengementBouteille">
+      <End Role="Rengement" EntitySet="Rengements" />
+      <End Role="Bouteille" EntitySet="Bouteilles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cave_inherits_Code" Association="Self.FK_Cave_inherits_Code">
+      <End Role="Code" EntitySet="Codes" />
+      <End Role="Cave" EntitySet="Caves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CaveRengement" Association="Self.FK_CaveRengement">
+      <End Role="Cave" EntitySet="Caves" />
+      <End Role="Rengement" EntitySet="Rengements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rengement_inherits_Code" Association="Self.FK_Rengement_inherits_Code">
+      <End Role="Code" EntitySet="Codes" />
+      <End Role="Rengement" EntitySet="Rengements" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

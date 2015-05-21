@@ -1,0 +1,43 @@
+﻿@model MvcCodetrace.Models.Rengement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Rengement</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QuantiteMax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QuantiteMax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Quantite)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quantite)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Emplacement)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Emplacement)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cave.Proprietaire)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cave.Proprietaire)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

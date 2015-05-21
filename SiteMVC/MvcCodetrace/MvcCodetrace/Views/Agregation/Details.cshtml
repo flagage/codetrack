@@ -1,0 +1,29 @@
+﻿@model MvcCodetrace.Models.Agregation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Agregation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodeContenu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodeContenu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Code.CodeTrace)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Code.CodeTrace)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

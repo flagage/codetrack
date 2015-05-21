@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CodeTraceModelStoreContainer" CdmEntityContainer="CodeTraceEntities">
+    <EntitySetMapping Name="Agregations">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeTraceModel.Agregation)">
+        <MappingFragment StoreEntitySet="Agregations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodeContenu" ColumnName="CodeContenu" />
+          <ScalarProperty Name="CodeId" ColumnName="CodeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bouteilles">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeTraceModel.Bouteille)">
+        <MappingFragment StoreEntitySet="Bouteilles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeVin" ColumnName="TypeVin" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Producteur" ColumnName="Producteur" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RengementId" ColumnName="RengementId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Caves">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeTraceModel.Cave)">
+        <MappingFragment StoreEntitySet="Caves">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Proprietaire" ColumnName="Proprietaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Codes">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeTraceModel.Code)">
+        <MappingFragment StoreEntitySet="Codes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodeTrace" ColumnName="CodeTrace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rengements">
+      <EntityTypeMapping TypeName="IsTypeOf(CodeTraceModel.Rengement)">
+        <MappingFragment StoreEntitySet="Rengements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Emplacement" ColumnName="Emplacement" />
+          <ScalarProperty Name="QuantiteMax" ColumnName="QuantiteMax" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="CaveId" ColumnName="CaveId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
